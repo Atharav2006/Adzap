@@ -1,0 +1,7 @@
+name = "adzap"
+compatibility_date = "2026-02-05"
+
+[site]
+bucket = "./"
+
+# This is a static site - all HTML/CSS/JS files in root
