@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Workspace - AdZapp</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="header-title">AdZapp Workspace</h1>
+                    <p class="text-dim small">Competition Adjudication Portal</p>
+                </div>
+                <div class="header-actions">
+                    <div class="user-info"
+                        style="border-right: 1px solid var(--glass-border); padding-right: 1.5rem; margin-right: 0.5rem;">
+                        <div class="user-name" id="judgeName">Loading...</div>
+                        <div class="badge badge-primary">Authorized Judge</div>
+                    </div>
+                    <button class="btn btn-outline" onclick="handleSignOut()">
+                        Sign Out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 2rem 0;">
+        <div id="alertContainer"></div>
+
+        <div style="display: grid; grid-template-columns: 1fr 350px; gap: 2rem;">
+            <!-- Left Column: Evaluation Form -->
+            <div>
+                <div class="card animate-fade-in">
+                    <div class="card-header">
+                        <h2 class="card-title">Precision Evaluation</h2>
+                        <p class="text-muted small">Input scores based on performance criteria</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teamSelect">Select Team Leader</label>
+                        <select id="teamSelect" class="form-control" style="font-size: 1.125rem; padding: 1rem;">
+                            <option value="">-- Select Active Team --</option>
+                        </select>
+                    </div>
+
+                    <div id="evaluationFormContainer" class="hidden">
+                        <form id="evaluationForm">
+                            <!-- Metrics Table -->
+                            <div class="table-container mb-lg">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Scoring Dimension</th>
+                                            <th style="width: 150px; text-align: center;">Points</th>
+                                            <th style="width: 100px; text-align: right;">Max</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>Skit Execution</strong>
+                                                <p class="text-dim small mb-0">Performance quality and impact</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <input type="number" id="skitExecution" name="skitExecution" min="0"
+                                                    max="20" value="0" required
+                                                    style="font-size: 1.5rem; text-align: center; width: 100px; background: var(--input-bg);">
+                                            </td>
+                                            <td style="text-align: right; color: var(--text-muted);">20</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Slogan / Jingle</strong>
+                                                <p class="text-dim small mb-0">Catchiness and brand relevance</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <input type="number" id="sloganJingle" name="sloganJingle" min="0"
+                                                    max="15" value="0" required
+                                                    style="font-size: 1.5rem; text-align: center; width: 100px; background: var(--input-bg);">
+                                            </td>
+                                            <td style="text-align: right; color: var(--text-muted);">15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Team Coordination</strong>
+                                                <p class="text-dim small mb-0">Synergy and group dynamics</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <input type="number" id="teamCoordination" name="teamCoordination"
+                                                    min="0" max="15" value="0" required
+                                                    style="font-size: 1.5rem; text-align: center; width: 100px; background: var(--input-bg);">
+                                            </td>
+                                            <td style="text-align: right; color: var(--text-muted);">15</td>
+                                        </tr>
+                                        <tr
+                                            style="background: rgba(99, 102, 241, 0.1); border-top: 2px solid var(--primary);">
+                                            <td><strong>Aggregate Result</strong></td>
+                                            <td style="text-align: center;">
+                                                <span id="totalScore"
+                                                    style="font-size: 2rem; font-weight: 800; color: var(--primary);">0</span>
+                                            </td>
+                                            <td style="text-align: right; font-weight: 700;">/ 50</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Compliance -->
+                            <div class="mb-xl">
+                                <h4 class="mb-sm text-primary">Regulatory Compliance</h4>
+                                <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                                    <div class="feature-card" style="padding: 1rem; cursor: pointer;"
+                                        onclick="document.getElementById('offensiveContent').click()">
+                                        <div class="checkbox-group">
+                                            <input type="checkbox" id="offensiveContent" name="offensiveContent">
+                                            <label for="offensiveContent">
+                                                <strong>Offensive/Vulgar Material</strong>
+                                                <p class="text-dim small mb-0">Team used prohibited language or concepts
+                                                </p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="feature-card" style="padding: 1rem; cursor: pointer;"
+                                        onclick="document.getElementById('originalContent').click()">
+                                        <div class="checkbox-group">
+                                            <input type="checkbox" id="originalContent" name="originalContent" checked>
+                                            <label for="originalContent">
+                                                <strong>Original Content</strong>
+                                                <p class="text-dim small mb-0">Performance is authentic and
+                                                    non-plagiarized</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="feature-card" style="padding: 1rem; cursor: pointer;"
+                                        onclick="document.getElementById('timeLimitFollowed').click()">
+                                        <div class="checkbox-group">
+                                            <input type="checkbox" id="timeLimitFollowed" name="timeLimitFollowed"
+                                                checked>
+                                            <label for="timeLimitFollowed">
+                                                <strong>Temporal Precision (2-3 min)</strong>
+                                                <p class="text-dim small mb-0">Team adhered to official session duration
+                                                </p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBtn">
+                                Finalize & Securely Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Sidebar Info -->
+            <div>
+                <div class="card animate-fade-in" style="animation-delay: 0.1s;">
+                    <div class="card-header">
+                        <h3 class="card-title" style="font-size: 1.125rem;">Snapshot</h3>
+                    </div>
+                    <div class="mb-md">
+                        <label>Active Judge</label>
+                        <p id="judgeNameDisplay" class="font-semibold" style="color: var(--text-main);"></p>
+                    </div>
+                    <div>
+                        <label>Selected Target</label>
+                        <p id="selectedTeamDisplay" class="text-secondary font-semibold" style="font-size: 1.25rem;">N/A
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card animate-fade-in" style="animation-delay: 0.2s;">
+                    <div class="card-header">
+                        <h3 class="card-title" style="font-size: 1.125rem;">Session History</h3>
+                    </div>
+                    <div id="submittedEvaluations" style="max-height: 400px; overflow-y: auto; scrollbar-width: thin;">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="judge.js"></script>
+</body>
+
+</html>

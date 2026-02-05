@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdZapp - Premium Evaluation System</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="hero-gradient"></div>
+
+    <div class="container" style="padding-top: 5rem; padding-bottom: 5rem;">
+        <!-- Welcome Section -->
+        <div class="text-center mb-xl animate-fade-in">
+            <h1 class="text-primary" style="font-size: 4rem; margin-bottom: 1rem; letter-spacing: -2px;">AdZapp</h1>
+            <h2 style="font-weight: 300; font-size: 1.5rem; color: var(--text-muted);">Advertisement Skit Competition
+            </h2>
+            <p class="text-muted mt-md"
+                style="font-size: 1.125rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                A sophisticated platform for professional adjudication and real-time result synchronization.
+            </p>
+        </div>
+
+        <!-- Info Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-bottom: 5rem;"
+            class="animate-fade-in">
+            <div class="card text-center" style="animation-delay: 0.1s;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px var(--primary-glow));">
+                    👨‍⚖️</div>
+                <h3 class="mb-sm">Judiciary Portal</h3>
+                <p class="text-muted mb-lg">Access your secure evaluation workspace to assess competing teams with
+                    precision.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="login.html" class="btn btn-primary btn-lg btn-block">Judge Sign In</a>
+                </div>
+            </div>
+
+            <div class="card text-center" style="animation-delay: 0.2s;">
+                <div
+                    style="font-size: 4rem; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px var(--secondary-glow));">
+                    📊</div>
+                <h3 class="mb-sm">Administrative Hub</h3>
+                <p class="text-muted mb-lg">Monitor live rankings, generate comprehensive reports, and manage
+                    competition data.</p>
+                <a href="login.html" class="btn btn-secondary btn-lg btn-block">Admin Dashboard</a>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="card animate-fade-in" style="animation-delay: 0.3s; padding: 4rem var(--space-lg);">
+            <div class="text-center mb-xl">
+                <h2 class="card-title" style="font-size: 2.5rem;">Engineered for Excellence</h2>
+                <p class="text-muted">Advanced features for a seamless competition experience</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4 class="text-primary mb-xs">🔒 Secure Auth</h4>
+                    <p class="text-muted small">Banking-grade authentication powered by Supabase infrastructure.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4 class="text-primary mb-xs">📝 Precision UI</h4>
+                    <p class="text-muted small">Focused evaluation interface designed for minimal distraction and
+                        maximum accuracy.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4 class="text-primary mb-xs">🚫 Integrity First</h4>
+                    <p class="text-muted small">Built-in constraints ensure one evaluation per judge per team,
+                        preventing data bias.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4 class="text-primary mb-xs">🔢 Aggregate Logic</h4>
+                    <p class="text-muted small">Calculations use absolute total sum logic for transparent and fair
+                        results.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4 class="text-primary mb-xs">🏆 Live Analytics</h4>
+                    <p class="text-muted small">Results synchronize instantly across the system for up-to-the-second
+                        rankings.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4 class="text-primary mb-xs">📊 Data Portability</h4>
+                    <p class="text-muted small">Seamlessly export all competition data to CSV for external archiving and
+                        analysis.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scoring Info -->
+        <div class="card animate-fade-in" style="animation-delay: 0.4s; overflow: hidden;">
+            <div class="card-header">
+                <h3 class="card-title">Criteria & Regulations</h3>
+            </div>
+
+            <div class="table-container mb-lg">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Evaluation Category</th>
+                            <th style="text-align: right;">Maximum Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Skit Execution & Performance</td>
+                            <td style="text-align: right; font-weight: 700;">20</td>
+                        </tr>
+                        <tr>
+                            <td>Slogan / Jingle Creativity</td>
+                            <td style="text-align: right; font-weight: 700;">15</td>
+                        </tr>
+                        <tr>
+                            <td>Team Coordination & Synergy</td>
+                            <td style="text-align: right; font-weight: 700;">15</td>
+                        </tr>
+                        <tr style="background: rgba(99, 102, 241, 0.1); border-top: 2px solid var(--primary);">
+                            <td style="font-weight: 700; color: var(--primary);">Maximum Total per Judge</td>
+                            <td style="text-align: right; font-weight: 800; color: var(--primary); font-size: 1.25rem;">
+                                50</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-success"
+                style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2);">
+                <span style="font-size: 1.25rem;">💡</span>
+                <p class="mb-0" style="font-size: 0.9375rem;">
+                    <strong>Synchronization Logic:</strong> Final team standings are determined by the <strong>absolute
+                        total sum</strong> of all valid judge evaluations. The system ensures transparency by
+                    documenting every point awarded.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-xl mb-xl">
+            <p class="text-muted" style="font-size: 0.875rem; letter-spacing: 1px; text-transform: uppercase;">
+                &copy; 2026 AdZapp Technologies. All rights reserved.
+            </p>
+        </div>
+    </div>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script>
+        // Redirect if already logged in
+        document.addEventListener('DOMContentLoaded', async () => {
+            const session = await checkAuth();
+            if (session) {
+                const user = await getCurrentUser();
+                if (user && !user.email.endsWith('@judge.adzapp.com')) {
+                    window.location.href = 'admin.html';
+                } else if (user) {
+                    window.location.href = 'judge.html';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

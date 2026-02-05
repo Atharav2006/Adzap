@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - AdZapp</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="hero-gradient"></div>
+
+    <div class="container container-sm"
+        style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 2rem 1rem;">
+        <!-- Header -->
+        <div class="text-center mb-lg animate-fade-in">
+            <a href="index.html" style="text-decoration: none;">
+                <h1 class="text-primary" style="font-size: 3rem; margin-bottom: 0.5rem; letter-spacing: -1px;">AdZapp
+                </h1>
+            </a>
+            <p class="text-muted">Secure Access Portal</p>
+        </div>
+
+        <!-- Login Card -->
+        <div class="card animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="card-header text-center">
+                <h2 class="card-title">Welcome Back</h2>
+                <p class="text-muted small">Please identify your role to continue</p>
+            </div>
+
+            <div id="alertContainer"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Access Role</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <label style="margin: 0; cursor: pointer;">
+                            <input type="radio" name="userRole" value="judge" checked style="display: none;"
+                                onchange="updateRoleUI(this)">
+                            <div class="role-card" id="judgeRoleCard"
+                                style="border: 2px solid var(--primary); background: rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: var(--radius-md); text-align: center; transition: all 0.3s ease;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">👨‍⚖️</div>
+                                <div style="font-weight: 600; color: var(--text-main);">Judge</div>
+                            </div>
+                        </label>
+                        <label style="margin: 0; cursor: pointer;">
+                            <input type="radio" name="userRole" value="admin" style="display: none;"
+                                onchange="updateRoleUI(this)">
+                            <div class="role-card" id="adminRoleCard"
+                                style="border: 2px solid var(--glass-border); padding: 1rem; border-radius: var(--radius-md); text-align: center; transition: all 0.3s ease;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">👤</div>
+                                <div style="font-weight: 600; color: var(--text-muted);">User</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailOrName" id="loginLabel">Authorized Name</label>
+                    <input type="text" id="emailOrName" name="emailOrName" placeholder="Enter your full name" required
+                        autocomplete="username">
+                    <small class="text-dim" id="loginHint"
+                        style="margin-top: 0.5rem; display: block; font-size: 0.75rem;">Verification of credentials
+                        required for entry.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Security Key</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required
+                        autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginBtn" style="margin-top: 1rem;">
+                    Authenticate Session
+                </button>
+            </form>
+
+            <div class="text-center mt-xl">
+                <p class="text-dim small">Secure evaluation access authorized by administrator.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-xl">
+            <p class="text-dim" style="font-size: 0.75rem; letter-spacing: 1px;">
+                SYSTEMS ONLINE &bull; SSL ENCRYPTED
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function updateRoleUI(radio) {
+            const judgeCard = document.getElementById('judgeRoleCard');
+            const adminCard = document.getElementById('adminRoleCard');
+            const loginLabel = document.getElementById('loginLabel');
+            const loginHint = document.getElementById('loginHint');
+            const emailOrName = document.getElementById('emailOrName');
+
+            if (radio.value === 'judge') {
+                judgeCard.style.borderColor = 'var(--primary)';
+                judgeCard.style.background = 'rgba(99, 102, 241, 0.1)';
+                judgeCard.querySelector('div:last-child').style.color = 'var(--text-main)';
+
+                adminCard.style.borderColor = 'var(--glass-border)';
+                adminCard.style.background = 'transparent';
+                adminCard.querySelector('div:last-child').style.color = 'var(--text-muted)';
+
+                loginLabel.textContent = 'Authorized Name';
+                emailOrName.placeholder = 'Enter your full name';
+                loginHint.textContent = 'Verification of credentials required for entry.';
+            } else {
+                adminCard.style.borderColor = 'var(--secondary)';
+                adminCard.style.background = 'rgba(236, 72, 153, 0.1)';
+                adminCard.querySelector('div:last-child').style.color = 'var(--text-main)';
+
+                judgeCard.style.borderColor = 'var(--glass-border)';
+                judgeCard.style.background = 'transparent';
+                judgeCard.querySelector('div:last-child').style.color = 'var(--text-muted)';
+
+                loginLabel.textContent = 'User Email';
+                emailOrName.placeholder = 'user@example.com';
+                loginHint.textContent = 'Use your official login credentials.';
+            }
+        }
+    </script>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

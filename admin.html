@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Hub - AdZapp</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container container-lg">
+            <div class="header-content">
+                <div>
+                    <h1 class="header-title">AdZapp Analytics</h1>
+                    <p class="text-dim small">Real-time Competition Governance Dashboard</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" onclick="exportToCSV()">
+                        <span>📊</span> Export CSV
+                    </button>
+                    <button class="btn btn-outline" onclick="setupAuthorizedTeams()">
+                        <span>🏗️</span> Setup Teams
+                    </button>
+                    <button class="btn btn-outline" onclick="refreshData()">
+                        <span>🔄</span> Sync Data
+                    </button>
+                    <button class="btn btn-outline" onclick="handleSignOut()">
+                        Sign Out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container container-lg" style="padding-top: 2.5rem; padding-bottom: 5rem;">
+        <div id="alertContainer"></div>
+
+        <!-- Summary Stats -->
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+            <div class="card text-center animate-fade-in"
+                style="animation-delay: 0.1s; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary);">
+                </div>
+                <h3 class="text-primary mb-xs"
+                    style="font-size: 3rem; font-family: 'Outfit'; font-weight: 800; line-height: 1;" id="totalTeams">-
+                </h3>
+                <p class="text-dim small uppercase" style="letter-spacing: 1px;">Competing Entities</p>
+            </div>
+            <div class="card text-center animate-fade-in"
+                style="animation-delay: 0.2s; position: relative; overflow: hidden;">
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--secondary);">
+                </div>
+                <h3 class="text-secondary mb-xs"
+                    style="font-size: 3rem; font-family: 'Outfit'; font-weight: 800; line-height: 1;"
+                    id="totalEvaluations">-</h3>
+                <p class="text-dim small uppercase" style="letter-spacing: 1px;">Data Points Logged</p>
+            </div>
+            <div class="card text-center animate-fade-in"
+                style="animation-delay: 0.3s; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #fff;"></div>
+                <h3 class="mb-xs"
+                    style="font-size: 3rem; font-family: 'Outfit'; font-weight: 800; line-height: 1; color: var(--text-main);"
+                    id="totalJudges">-</h3>
+                <p class="text-dim small uppercase" style="letter-spacing: 1px;">Active Adjudicators</p>
+            </div>
+            <div class="card text-center animate-fade-in"
+                style="animation-delay: 0.4s; position: relative; overflow: hidden;">
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--tertiary);">
+                </div>
+                <h3 class="text-success mb-xs"
+                    style="font-size: 3rem; font-family: 'Outfit'; font-weight: 800; line-height: 1;" id="avgScore">-
+                </h3>
+                <p class="text-dim small uppercase" style="letter-spacing: 1px;">Mean Result Index</p>
+            </div>
+        </div>
+
+        <!-- Document Submission -->
+        <!-- Document Submission -->
+        <div class="card mb-xl animate-fade-in"
+            style="animation-delay: 0.45s; border-left: 4px solid var(--secondary); margin-bottom: 2rem;">
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <div>
+                        <h2 class="card-title" style="font-size: 1.5rem;">Document Submission</h2>
+                        <p class="text-muted">Upload your team's assets directly to the Competition Drive.</p>
+                    </div>
+                </div>
+
+                <div
+                    style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: var(--radius-md); border: 1px dashed var(--glass-border);">
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <input type="file" id="fileInput" class="form-control" style="padding: 0.5rem;">
+                        <button id="uploadBtn" class="btn btn-primary" onclick="handleFileUpload()"
+                            style="min-width: 140px;">
+                            <span>📤</span> Upload
+                        </button>
+                    </div>
+                    <div id="uploadStatus" style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-dim);"></div>
+                </div>
+
+                <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: -0.5rem;">
+                    Legacy Access: <a
+                        href="https://drive.google.com/drive/folders/1r911mqzJVftfG1UqgAAv4YF-PhfLzNTu?usp=drive_link"
+                        target="_blank" style="color: var(--secondary);">Open Google Drive Folder</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 400px; gap: 2rem;">
+            <!-- Performance Standings -->
+            <div class="card animate-fade-in" style="animation-delay: 0.5s;">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div>
+                        <h2 class="card-title" style="font-size: 1.75rem;">Standings Matrix</h2>
+                        <p class="text-muted small">Live rankings based on aggregate adjudicator metrics</p>
+                    </div>
+                    <div class="badge badge-success">Live Synchronization Active</div>
+                </div>
+
+                <div id="rankingsContainer">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <!-- Adjudicator Insights -->
+            <div class="card animate-fade-in" style="animation-delay: 0.6s;">
+                <div class="card-header">
+                    <h2 class="card-title" style="font-size: 1.25rem;">Entity Deep-Dive</h2>
+                    <p class="text-muted small">Select an entity to view score decomposition</p>
+                </div>
+
+                <div id="detailsContainer" style="min-height: 300px;">
+                    <div
+                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 300px; opacity: 0.5;">
+                        <span style="font-size: 3rem; margin-bottom: 1rem;">🔍</span>
+                        <p class="text-dim">Pending Entity Selection</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Entity Details -->
+    <div id="teamModal" class="modal-overlay hidden">
+        <div class="modal animate-fade-in"
+            style="max-width: 900px; padding: 0; border-radius: var(--radius-lg); overflow: hidden;">
+            <div class="modal-header"
+                style="background: var(--bg-dark); padding: 2rem; border-bottom: 1px solid var(--glass-border);">
+                <h3 class="modal-title" id="modalTeamName" style="font-size: 2rem; color: var(--text-main);">Entity
+                    Details</h3>
+            </div>
+            <div class="modal-body" style="padding: 2rem; max-height: 70vh; overflow-y: auto;">
+                <div id="modalContent"></div>
+            </div>
+            <div class="modal-footer"
+                style="padding: 1.5rem 2rem; background: rgba(0,0,0,0.05); border-top: 1px solid var(--glass-border);">
+                <button class="btn btn-outline" style="min-width: 150px;" onclick="closeTeamModal()">Close
+                    Analytics</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
